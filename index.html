@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>KubeJS Generator</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <div class="main">
+            <h1>Use this simple website to generate basic KubeJS scripts</h1>
+            <h3>Fill out the following fields depending on what you want!</h3>
+        </div>
+        <div class="generator">
+            <div class="input">
+                <select id="type" class="input-box">
+                    <option value="item">Custom Item</option>
+                    <option value="block">Custom Block</option>
+                    <option value="recipe">Custom Recipe</option>
+                </select>
+                <select id="version" class="input-box">
+                    <option value="1.19.2+">1.19.2+</option>
+                    <option value="<1.19.2"><1.19.2</option>
+                </select>
+                <input type="text" id="registry-name" placeholder="Name..." class="input-box">
+                <select id="recipe-type" class="input-box">
+                    <option value="shaped">Shaped Crafting</option>
+                    <option value="shapeless">Shapeless Crafting</option>
+                    <option value="smelting">Smelting</option>
+                    <option value="blasting">Blasting</option>
+                    <option value="smoking">Smoking</option>
+                    <option value="smithing">Smithing</option>
+                    <option value="stonecutting">Stonecutting</option>
+                    <option value="campfire">Campfire Cooking</option>
+                </select>
+            </div>
+            <div class="output">
+
+                <p id="output-box">
+
+                </p>
+                <button id="copyButton">
+                    <img src="assets/copy.png" alt="Copy Icon">
+                </button>
+            </div>
+            <div id="toast">
+                <p>Code Copied!</p>
+            </div>
+        </div>
+        <script src="js/app.js" async defer></script>
+    </body>
+</html>
