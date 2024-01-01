@@ -8,7 +8,7 @@ window.onload = function() {
     var descriptionBox = document.getElementById('description');
 
     /* atributes */ 
-    var displayName = document.getElementById('display-name');
+    var displayNameInput = document.getElementById('display-name');
 
     /* Replace Spaces with Underscores */
     registryNameInput.addEventListener('input', function() {
@@ -38,62 +38,68 @@ window.onload = function() {
         var version = versionSelect.value;
         var recipeType = recipeTypeSelect.value;
 
+        var displayName = displayNameInput.value;
+
+
         if (type === 'recipe') {
             recipeTypeSelect.style.display = 'inline-block';
             registryNameInput.style.display = 'none';
+            descriptionBox.innerText = 'Put into your server_scripts folder.'
         } else {
             recipeTypeSelect.style.display = 'none';
             registryNameInput.style.display = 'inline-block';
+            descriptionBox.innerText = 'Put into your startup_scripts folder. For block/item textures/models please refer to the wiki'
         }
 
         if (type === 'item' && version === '1.19.2+') {
             var name = registryNameInput.value
             outputBox.innerHTML = "<pre>" + `StartupEvents.registry('item', event => {\n\tevent.create('${name}')\n})`;
             recipeTypeSelect.style.display = 'none';
-            displayName.style.display = 'inline-block';
-            descriptionBox.innerText = 'Put into your startup_scripts folder. For block/item textures/models please refer to the wiki'
+            displayNameInput.style.display = 'inline-block';
             console.log('item, 1.19.2+');
         } else if (type === 'block' && version === '1.19.2+') {
             var name = registryNameInput.value
             outputBox.innerHTML = "<pre>" + `StartupEvents.registry('block', event => {\n\tevent.create('${name}')\n})`;
             recipeTypeSelect.style.display = 'none';
-            displayName.style.display = 'inline-block';
-            descriptionBox.innerText = 'Put into your startup_scripts folder. For block/item textures/models please refer to the wiki'
+            displayNameInput.style.display = 'inline-block';
             console.log('block, 1.19.2+');
         } else if (type === 'recipe' && version === '1.19.2+') {
             recipeTypeSelect.style.display = 'inline-block';
-            displayName.style.display = 'none';
+            displayNameInput.style.display = 'none';
             outputBox.innerHTML = "<pre>" + `ServerEvents.recipes(event => {\n\tevent.${recipeType}\n})`;
-            descriptionBox.innerText = 'Put into your server_scripts folder.'
             console.log(`recipe, 1.19.2+, ${recipeType}`);
 
         } else if (type === 'item' && version === '<1.19.2') {
             var name = registryNameInput.value
             outputBox.innerHTML = "<pre>" + `onEvent('item.registry', event => {\n\tevent.create('${name}')\n})`;
             recipeTypeSelect.style.display = 'none';
-            displayName.style.display = 'inline-block';
-            descriptionBox.innerText = 'Put into your startup_scripts folder. For block/item textures/models please refer to the wiki'
+            displayNameInput.style.display = 'inline-block';
             console.log('item, <1.19.2');
         } else if (type === 'block' && version === '<1.19.2') {
             var name = registryNameInput.value
             outputBox.innerHTML = "<pre>" + `onEvent('block.registry', event => {\n\tevent.create(${name})\n})`;
             recipeTypeSelect.style.display = 'none';
-            displayName.style.display = 'inline-block';
-            descriptionBox.innerText = 'Put into your startup_scripts folder. For block/item textures/models please refer to the wiki'
+            displayNameInput.style.display = 'inline-block';
             console.log('block, <1.19.2');
         } else if (type === 'recipe' && version === '<1.19.2') {
             recipeTypeSelect.style.display = 'inline-block';
-            displayName.style.display = 'none';
+            displayNameInput.style.display = 'none';
             outputBox.innerHTML = "<pre>" + `onEvent('recipes', event => {\n\tevent.${recipeType}\n})`;
-            descriptionBox.innerText = 'Put into your server_scripts folder.'
             console.log(`recipe, <1.19.2, ${recipeType}`);
+        } 
+
+        if (displayName != '') {
+            outputBox.innerHTML = "<pre>" + `.displayName('${displayName}')` + "<pre>"
         }
     }
+
+
 
     typeSelect.addEventListener('change', updateOutput);
     versionSelect.addEventListener('change', updateOutput);
     recipeTypeSelect.addEventListener('change', updateOutput);
     registryNameInput.addEventListener('input', updateOutput);
+    displayNameInput.addEventListener('input', updateOutput);
 
     updateOutput();
 }
