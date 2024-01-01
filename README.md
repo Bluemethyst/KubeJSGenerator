@@ -1,2 +1,3 @@
 # KubeJSGenerator
+# UNDER DEVELOPMENT, EARLY ALPHA AVALIBLE AT [bluemethyst.dev](https://kjs.bluemethyst.dev)
 A website to generate scripts for KubeJS, a Minecraft scripting mod
