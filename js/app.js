@@ -5,6 +5,7 @@ window.onload = function() {
     var versionSelect = document.getElementById('version');
     var recipeTypeSelect = document.getElementById('recipe-type');
     var registryNameInput = document.getElementById('registry-name');
+    var descriptionBox = document.getElementById('description');
 
     /* atributes */ 
     var displayName = document.getElementById('display-name');
@@ -50,17 +51,20 @@ window.onload = function() {
             outputBox.innerHTML = "<pre>" + `StartupEvents.registry('item', event => {\n\tevent.create('${name}')\n})`;
             recipeTypeSelect.style.display = 'none';
             displayName.style.display = 'inline-block';
+            descriptionBox.innerText = 'Put into your startup_scripts folder. For block/item textures/models please refer to the wiki'
             console.log('item, 1.19.2+');
         } else if (type === 'block' && version === '1.19.2+') {
             var name = registryNameInput.value
             outputBox.innerHTML = "<pre>" + `StartupEvents.registry('block', event => {\n\tevent.create('${name}')\n})`;
             recipeTypeSelect.style.display = 'none';
             displayName.style.display = 'inline-block';
+            descriptionBox.innerText = 'Put into your startup_scripts folder. For block/item textures/models please refer to the wiki'
             console.log('block, 1.19.2+');
         } else if (type === 'recipe' && version === '1.19.2+') {
             recipeTypeSelect.style.display = 'inline-block';
             displayName.style.display = 'none';
             outputBox.innerHTML = "<pre>" + `ServerEvents.recipes(event => {\n\tevent.${recipeType}\n})`;
+            descriptionBox.innerText = 'Put into your server_scripts folder.'
             console.log(`recipe, 1.19.2+, ${recipeType}`);
 
         } else if (type === 'item' && version === '<1.19.2') {
@@ -68,17 +72,20 @@ window.onload = function() {
             outputBox.innerHTML = "<pre>" + `onEvent('item.registry', event => {\n\tevent.create('${name}')\n})`;
             recipeTypeSelect.style.display = 'none';
             displayName.style.display = 'inline-block';
+            descriptionBox.innerText = 'Put into your startup_scripts folder. For block/item textures/models please refer to the wiki'
             console.log('item, <1.19.2');
         } else if (type === 'block' && version === '<1.19.2') {
             var name = registryNameInput.value
             outputBox.innerHTML = "<pre>" + `onEvent('block.registry', event => {\n\tevent.create(${name})\n})`;
             recipeTypeSelect.style.display = 'none';
             displayName.style.display = 'inline-block';
+            descriptionBox.innerText = 'Put into your startup_scripts folder. For block/item textures/models please refer to the wiki'
             console.log('block, <1.19.2');
         } else if (type === 'recipe' && version === '<1.19.2') {
             recipeTypeSelect.style.display = 'inline-block';
             displayName.style.display = 'none';
             outputBox.innerHTML = "<pre>" + `onEvent('recipes', event => {\n\tevent.${recipeType}\n})`;
+            descriptionBox.innerText = 'Put into your server_scripts folder.'
             console.log(`recipe, <1.19.2, ${recipeType}`);
         }
     }
@@ -91,14 +98,3 @@ window.onload = function() {
     updateOutput();
 }
 
-/* make sure the wrong things arent displaying */
-document.getElementById('type').addEventListener('change', function() {
-    var recipeTypeSelect = document.getElementById('recipe-type');
-    if (this.value !== 'recipe') {
-        recipeTypeSelect.style.display = 'none';
-        displayName.style.display = 'inline-block';
-    } else {
-        recipeTypeSelect.style.display = 'inline-block';
-        displayName.style.display = 'none';
-    }
-});
