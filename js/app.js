@@ -1,11 +1,13 @@
 window.onload = function() {
+    var outputBox = document.getElementById('output-box');
+
     var typeSelect = document.getElementById('type');
     var versionSelect = document.getElementById('version');
     var recipeTypeSelect = document.getElementById('recipe-type');
-    var outputBox = document.getElementById('output-box');
     var registryNameInput = document.getElementById('registry-name');
 
-    var registryNameInput = document.getElementById('registry-name');
+    /* atributes */ 
+    var displayName = document.getElementById('display-name');
 
     /* Replace Spaces with Underscores */
     registryNameInput.addEventListener('input', function() {
@@ -47,14 +49,17 @@ window.onload = function() {
             var name = registryNameInput.value
             outputBox.innerHTML = "<pre>" + `StartupEvents.registry('item', event => {\n\tevent.create('${name}')\n})`;
             recipeTypeSelect.style.display = 'none';
+            displayName.style.display = 'inline-block';
             console.log('item, 1.19.2+');
         } else if (type === 'block' && version === '1.19.2+') {
             var name = registryNameInput.value
             outputBox.innerHTML = "<pre>" + `StartupEvents.registry('block', event => {\n\tevent.create('${name}')\n})`;
             recipeTypeSelect.style.display = 'none';
+            displayName.style.display = 'inline-block';
             console.log('block, 1.19.2+');
         } else if (type === 'recipe' && version === '1.19.2+') {
             recipeTypeSelect.style.display = 'inline-block';
+            displayName.style.display = 'none';
             outputBox.innerHTML = "<pre>" + `ServerEvents.recipes(event => {\n\tevent.${recipeType}\n})`;
             console.log(`recipe, 1.19.2+, ${recipeType}`);
 
@@ -62,19 +67,19 @@ window.onload = function() {
             var name = registryNameInput.value
             outputBox.innerHTML = "<pre>" + `onEvent('item.registry', event => {\n\tevent.create('${name}')\n})`;
             recipeTypeSelect.style.display = 'none';
+            displayName.style.display = 'inline-block';
             console.log('item, <1.19.2');
-
         } else if (type === 'block' && version === '<1.19.2') {
             var name = registryNameInput.value
             outputBox.innerHTML = "<pre>" + `onEvent('block.registry', event => {\n\tevent.create(${name})\n})`;
             recipeTypeSelect.style.display = 'none';
+            displayName.style.display = 'inline-block';
             console.log('block, <1.19.2');
-
         } else if (type === 'recipe' && version === '<1.19.2') {
             recipeTypeSelect.style.display = 'inline-block';
-            outputBox.innerHTML = "<pre>" + `onEvent('recipes', event => {\n\tevent.${recipeType}\n)`;
+            displayName.style.display = 'none';
+            outputBox.innerHTML = "<pre>" + `onEvent('recipes', event => {\n\tevent.${recipeType}\n})`;
             console.log(`recipe, <1.19.2, ${recipeType}`);
-
         }
     }
 
@@ -91,7 +96,9 @@ document.getElementById('type').addEventListener('change', function() {
     var recipeTypeSelect = document.getElementById('recipe-type');
     if (this.value !== 'recipe') {
         recipeTypeSelect.style.display = 'none';
+        displayName.style.display = 'inline-block';
     } else {
         recipeTypeSelect.style.display = 'inline-block';
+        displayName.style.display = 'none';
     }
 });
