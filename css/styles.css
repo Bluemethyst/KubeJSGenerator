@@ -45,8 +45,22 @@ body {
     padding: 20px;
     margin-top: 20px;
     position: relative;
-
 }
+
+/* unvisited link */
+a:link {
+    color: var(--text-color);
+}
+
+/* visited link */
+a:visited {
+    color: var(--text-color);
+}
+
+#output-box {
+    white-space: pre;
+    font-family: monospace;
+ }
 
 #copyButton{
     background-color: rgba(255, 255, 255, 0);
