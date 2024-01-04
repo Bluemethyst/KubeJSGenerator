@@ -13,6 +13,7 @@ window.onload = function() {
     /* atributes */ 
     var displayNameInput = document.getElementById('display-name');
     var blockSoundInput = document.getElementById('block-sound');
+    var smeltingInputs = document.getElementsByClassName('smelting');
 
     /* Replace Spaces with Underscores */
     registryNameInput.addEventListener('input', function() {
@@ -44,6 +45,7 @@ window.onload = function() {
 
         var displayName = displayNameInput.value;
         var blockSound = blockSoundInput.value;
+        var smelting = smeltingInputs.value;
 
 
         if (type === 'recipe') {
@@ -67,6 +69,7 @@ window.onload = function() {
             outputWrapper.innerHTML = "<pre>" + `StartupEvents.registry('item', event => {`
             outputBox.innerHTML = "<pre>" + `\tevent.create('${name}')`;
             recipeTypeSelect.style.display = 'none';
+            smeltingInputs.style.display = 'none';
             displayNameInput.style.display = 'inline-block';
             console.log('item, 1.19.2+');
         } else if (type === 'block' && version === '1.19.2+') {
@@ -74,10 +77,12 @@ window.onload = function() {
             outputWrapper.innerHTML = "<pre>" + `StartupEvents.registry('block', event => {`
             outputBox.innerHTML = "<pre>" + `\tevent.create('${name}')`;
             recipeTypeSelect.style.display = 'none';
+            smeltingInputs.style.display = 'none';
             displayNameInput.style.display = 'inline-block';
             console.log('block, 1.19.2+');
         } else if (type === 'recipe' && version === '1.19.2+') {
             recipeTypeSelect.style.display = 'inline-block';
+            smeltingInputs.style.display = 'inline-block';
             displayNameInput.style.display = 'none';
             outputWrapper.innerHTML = "<pre>" + `StartupEvents.recipes(event => {`
             outputBox.innerHTML = "<pre>" + `\tevent.${recipeType}()`;
@@ -88,6 +93,7 @@ window.onload = function() {
             outputWrapper.innerHTML = "<pre>" + `onEvent('item.registry', event => {`
             outputBox.innerHTML = "<pre>" + `\tevent.create('${name}')`;
             recipeTypeSelect.style.display = 'none';
+            smeltingInputs.style.display = 'none';
             displayNameInput.style.display = 'inline-block';
             console.log('item, <1.19.2');
         } else if (type === 'block' && version === '<1.19.2') {
@@ -95,10 +101,12 @@ window.onload = function() {
             outputWrapper.innerHTML = "<pre>" + `onEvent('block.registry', event => {`
             outputBox.innerHTML = "<pre>" + `\tevent.create('${name}')`;
             recipeTypeSelect.style.display = 'none';
+            smeltingInputs.style.display = 'none';
             displayNameInput.style.display = 'inline-block';
             console.log('block, <1.19.2');
         } else if (type === 'recipe' && version === '<1.19.2') {
             recipeTypeSelect.style.display = 'inline-block';
+            smeltingInputs.style.display = 'inline-block';
             displayNameInput.style.display = 'none';
             outputWrapper.innerHTML = "<pre>" + `onEvent('recipes', event => {`
             outputBox.innerHTML = "<pre>" + `\tevent.${recipeType}`;
