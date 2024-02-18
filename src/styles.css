@@ -33,3 +33,44 @@ a:visited {
 	padding: 50px;
 	text-align: center;
 }
+
+.input-box {
+	border: none;
+	border-radius: 20px;
+	color: var(--text-color);
+	background-color: var(--third-color);
+}
+
+.output-box {
+	background-color: var(--third-color);
+	width: 80%;
+	border-radius: 20px;
+	padding: 20px;
+	margin-top: 20px;
+	position: relative;
+	resize: none;
+}
+
+#script-selection {
+	width: 120px;
+}
+
+#version-selection {
+	width: 130px;
+}
+
+textarea:focus,
+select:focus,
+input:focus {
+	outline: none;
+}
+
+select {
+	appearance: none;
+	-webkit-appearance: none; /* for Chrome and Safari */
+	-moz-appearance: none; /* for Firefox */
+	background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0  0  4  5"><path fill="%23000000" d="M2  0L0  2h4zm0  5L0  3h4z"/></svg>');
+	background-repeat: no-repeat;
+	background-position: right 0.7em center;
+	background-size: 0.65em auto;
+}

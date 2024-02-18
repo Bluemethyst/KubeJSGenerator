@@ -1,3 +1,11 @@
+<script lang="ts">
+	import type { PageData } from './$types';
+	export let data: PageData;
+
+	let displayName = '';
+	let scriptType = '';
+</script>
+
 <title>KubeJS Gen</title>
 <div class="main">
 	<h1>Use this simple website to generate basic KubeJS scripts</h1>
@@ -11,4 +19,24 @@
 			href="https://github.com/Bluemethyst/KubeJSGenerator">Github</a
 		>
 	</h4>
+</div>
+
+<div class="main">
+	<select name="script-type" class="input-box" id="script-selection" bind:value={scriptType}>
+		<option value="recipe">Custom Item</option>
+		<option value="block">Custom Block</option>
+		<option value="item">Custom Recipe</option>
+	</select>
+
+	<select name="version" class="input-box" id="version-selection">
+		<option value="1.19.2">1.19.2 or Above</option>
+		<option value="1.18.2">Below 1.19.2</option>
+	</select>
+
+	<input class="input-box" type="text" placeholder="Display Name" bind:value={displayName} />
+	<input class="input-box" type="text" />
+	<input class="input-box" type="text" />
+	<input class="input-box" type="text" />
+	<h2>Output Code</h2>
+	<textarea class="output-box" id="output-code" readonly>{data.output}</textarea>
 </div>
