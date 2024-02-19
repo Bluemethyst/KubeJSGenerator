@@ -43,6 +43,7 @@ a:visited {
 
 .output-box {
 	background-color: var(--third-color);
+	color: var(--text-color);
 	width: 80%;
 	border-radius: 20px;
 	padding: 20px;

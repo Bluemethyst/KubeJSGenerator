@@ -3,7 +3,44 @@
 	export let data: PageData;
 
 	let displayName = '';
-	let scriptType = '';
+	let name = '';
+	let scriptType = 'item';
+	// Define your code snippets
+	const codeSnippets = {
+		customItem: (name: string, displayName: string) => `// Custom Item Code
+    const item = {
+      displayName: "${displayName}",
+	  name: "${name}",
+      // ... other properties
+    };`,
+		customBlock: (name: string, displayName: string) => `// Custom Block Code
+    const block = {
+      displayName: "${displayName}",
+	  name: "${name}",
+      // ... other properties
+    };`
+		// ... add more snippets as needed
+	};
+
+	// Function to generate code based on user input
+	function generateCode() {
+		let output = '';
+		if (scriptType === 'item') {
+			output = codeSnippets.customItem(displayName, name);
+		} else if (scriptType === 'block') {
+			output = codeSnippets.customBlock(displayName, name);
+		}
+		// ... handle other script types
+		return output;
+	}
+
+	// Function to handle form submission
+	function handleSubmit(event: Event) {
+		event.preventDefault();
+		const code = generateCode();
+		// Update the output area with the generated code
+		data.output = code;
+	}
 </script>
 
 <title>KubeJS Gen</title>
@@ -33,10 +70,13 @@
 		<option value="1.18.2">Below 1.19.2</option>
 	</select>
 
+	<input class="input-box" type="text" placeholder="Name" bind:value={name} />
 	<input class="input-box" type="text" placeholder="Display Name" bind:value={displayName} />
 	<input class="input-box" type="text" />
 	<input class="input-box" type="text" />
-	<input class="input-box" type="text" />
+	<form method="post" on:submit={handleSubmit}>
+		<button class="input-box" type="submit" formaction="?/generateCode">Generate!</button>
+	</form>
 	<h2>Output Code</h2>
 	<textarea class="output-box" id="output-code" readonly>{data.output}</textarea>
 </div>

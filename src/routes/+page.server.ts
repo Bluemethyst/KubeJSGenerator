@@ -1,7 +1,6 @@
-import { generateCode } from '$lib';
 import type { PageServerLoad } from './$types';
 
 export const load = (async () => {
-	let output = generateCode('{"script-type":"hey"}');
+	let output = 'Change the inputs to generate some code!';
 	return { output };
 }) satisfies PageServerLoad;
